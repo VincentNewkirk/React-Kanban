@@ -19,11 +19,11 @@ Router.get('/', (req, res) => {
   db.find( (err, tasks) => {
     if(err)
       return res.send(err);
-    return res.json(tasks);
+    return res.send(tasks);
   });
 });
 
-Router.put('/tasks/:id', (req, res) => {
+Router.put('/:id', (req, res) => {
   db.findById(req.params.id, (err, task) => {
     console.log(req.body);
     task.name = req.body.name;

@@ -11,10 +11,11 @@ db.once('open', function() {
   console.log('we are connected!');
 });
 
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
-app.use('/', taskRouter);
+app.use('/tasks', taskRouter);
 
 
 app.listen(3000, _ => {
