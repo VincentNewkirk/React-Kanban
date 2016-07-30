@@ -1,0 +1,67 @@
+// Resets, Clearfix, etc
+/* @import 'partials/clearfix'; */
+/* @import 'partials/reset'; */
+
+// Variables
+$bgColor: #b5b5b5;
+
+// Media Query Ranges
+$medium: "only screen and (min-width: 600px)";
+$large: "only screen and (min-width: 900px)";
+$x-large: "only screen and (min-width: 1350px)";
+
+*{
+  font-family: 'Rajdhani', sans-serif;
+  text-align:center;
+}
+
+body {
+  color: #000000;
+  background-color: $bgColor;
+  text-align: center;
+  align-items: center;
+  padding: 2em;
+
+  @media #{$medium}{
+  }
+
+  @media #{$large}{
+  }
+
+  @media #{$x-large}{
+  }
+}
+
+h1{
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+}
+
+div#mainDiv {
+  background-color: #a5a5a5;
+  display:flex;
+  flex-flow: row wrap;
+  text-align: center;
+}
+
+
+div#titleDiv {
+  background-color: #a0a0a0;
+  display: block;
+  width: 100%;
+}
+
+div#colOne {
+  background-color: #ffffff;
+  flex: 1 1 auto;
+}
+
+div#colTwo {
+  background-color: #dcdcdc;
+  flex: 1 1 auto;
+}
+
+div#colThree {
+  background-color: #cdcdcd;
+  flex: 1 1 auto;
+}

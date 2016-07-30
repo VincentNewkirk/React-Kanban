@@ -12,8 +12,6 @@ class KanbanBox extends React.Component {
     this.onMongoData = this.onMongoData.bind(this)
   }
 
-
-
   onMongoData(data){
     // console.log(data);
     const parsedMongoData = JSON.parse(data.currentTarget.response);
@@ -52,8 +50,11 @@ class KanbanBox extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>KanbanBox</h1>
+
+      <div id="mainDiv">
+
+        <div id="titleDiv"><h1>KanbanBox</h1></div>
+
         <h3>{this.state.toDo.name}</h3>
         <ToDoBox data={this.state.toDo}/>
         <DoingBox data={this.state.doing}/>
@@ -79,7 +80,7 @@ class ToDoBox extends React.Component {
       )
     });
     return (
-      <div>
+      <div id="colOne">
         <div>To Do Tasks
         { taskListNode }
         </div>
@@ -96,7 +97,7 @@ class DoingBox extends React.Component {
       )
     });
     return (
-      <div>
+      <div id="colTwo">
         <div>Doing Tasks
         {taskListNode}
         </div>
@@ -113,7 +114,7 @@ class DoneBox extends React.Component {
       )
     });
     return (
-      <div>
+      <div id="colThree">
         <div>Done Tasks
         {taskListNode}
         </div>
