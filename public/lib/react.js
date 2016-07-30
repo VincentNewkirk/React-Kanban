@@ -1,24 +1,42 @@
+
 'use strict';
-// var data = [
-//   {id:1, name: "Cats are awesome", author: 'joejoebinks3'},
-//   {id:2, name: "Dogs are awesome", author: 'sgnl'},
-//   {id:3, title: "Turtles are awesome", author: 'jaywon'},
-//   {id:4, title: "Birds are awesome", author: 'theRemix'},
-// ]
 
 class KanbanBox extends React.Component {
   constructor() {
     super();
     this.state = {
-      data : []
+      toDo: [],
+      doing: [],
+      done: []
     }
     this.onMongoData = this.onMongoData.bind(this)
   }
 
+
+
   onMongoData(data){
-    console.log(data);
+    // console.log(data);
     const parsedMongoData = JSON.parse(data.currentTarget.response);
-    this.setState({ data: parsedMongoData});
+    // console.log(parsedMongoData);
+    const toDoData = parsedMongoData.filter(function(el, index){
+      return parsedMongoData[index].status === "to-do"
+    });
+
+    const doingData = parsedMongoData.filter((el, index) => {
+      return parsedMongoData[index].status === "doing"
+    })
+
+    const doneData = parsedMongoData.filter((el, index) => {
+      return parsedMongoData[index].status === "done"
+    })
+
+    console.log(doingData);
+
+    this.setState({
+      toDo: toDoData,
+      doing: doingData,
+      done: doneData,
+    });
   }
 
   loadDataFromMongo(){
@@ -36,8 +54,10 @@ class KanbanBox extends React.Component {
     return (
       <div>
         <h1>KanbanBox</h1>
-        <h3>{this.state.data.name}</h3>
-        <ToDoBox data={this.state.data}/>
+        <h3>{this.state.toDo.name}</h3>
+        <ToDoBox data={this.state.toDo}/>
+        <DoingBox data={this.state.doing}/>
+        <DoneBox data={this.state.done}/>
       </div>
     );
   };
@@ -54,22 +74,55 @@ KanbanBox.defaultProps = {
 class ToDoBox extends React.Component {
   render() {
     var taskListNode = this.props.data.map(function(taskDataItem){
-    console.log(taskDataItem);
       return (
-        <DoingBox name={taskDataItem.name} author={taskDataItem.author} key={taskDataItem._id} description={taskDataItem.description}/>
+        <TaskFormatter name={taskDataItem.name} author={taskDataItem.author} key={taskDataItem._id} description={taskDataItem.description}/>
       )
     });
-  console.log(this.props.data);
     return (
       <div>
-        <h1>To Do Tasks</h1>
+        <div>To Do Tasks
         { taskListNode }
+        </div>
       </div>
     );
   };
 };
 
 class DoingBox extends React.Component {
+  render() {
+      var taskListNode = this.props.data.map(function(taskDataItem){
+      return (
+        <TaskFormatter name={taskDataItem.name} author={taskDataItem.author} key={taskDataItem._id} description={taskDataItem.description}/>
+      )
+    });
+    return (
+      <div>
+        <div>Doing Tasks
+        {taskListNode}
+        </div>
+      </div>
+    );
+  }
+}
+
+class DoneBox extends React.Component {
+  render() {
+      var taskListNode = this.props.data.map(function(taskDataItem){
+      return (
+        <TaskFormatter name={taskDataItem.name} author={taskDataItem.author} key={taskDataItem._id} description={taskDataItem.description}/>
+      )
+    });
+    return (
+      <div>
+        <div>Done Tasks
+        {taskListNode}
+        </div>
+      </div>
+    );
+  }
+}
+
+class TaskFormatter extends React.Component {
   render() {
     return (
       <div className='taskItem'>
@@ -81,9 +134,6 @@ class DoingBox extends React.Component {
   };
 };
 
-// class DoneBox extends React.Component {
-
-// }
 
 ReactDOM.render(
   <KanbanBox/>,

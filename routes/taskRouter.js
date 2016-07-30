@@ -29,6 +29,7 @@ Router.put('/:id', (req, res) => {
     task.name = req.body.name;
     task.author = req.body.author;
     task.description = req.body.description;
+    task.status = req.body.status;
 
     task.save(function(err){
       if (err)
@@ -38,7 +39,7 @@ Router.put('/:id', (req, res) => {
   });
 });
 
-Router.delete('/tasks/:id', (req, res) => {
+Router.delete('/:id', (req, res) => {
   db.remove({
     _id: req.params.id
   })
