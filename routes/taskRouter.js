@@ -32,9 +32,10 @@ Router.put('/:id', (req, res) => {
     task.status = req.body.status;
 
     task.save(function(err){
-      if (err)
-        res.send(err);
-      return res.json({message: 'Task Updated'});
+      if (err) {
+        return res.send(err);
+      }
+      return res.json({'success': true});
     });
   });
 });
