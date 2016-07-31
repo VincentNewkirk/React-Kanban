@@ -1,4 +1,3 @@
-
 'use strict';
 
 class KanbanBox extends React.Component {
@@ -7,9 +6,11 @@ class KanbanBox extends React.Component {
     this.state = {
       toDo: [],
       doing: [],
-      done: []
+      done: [],
+      test: "",
     }
-    this.onMongoData = this.onMongoData.bind(this)
+    this.onMongoData = this.onMongoData.bind(this);
+    this.updateHandler = this.updateHandler.bind(this);
   }
 
 
@@ -43,18 +44,28 @@ class KanbanBox extends React.Component {
     req.send();
   }
 
+  updateHandler() {
+    this.loadDataFromMongo();
+  }
+
   componentDidMount() {
     this.loadDataFromMongo();
   };
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+
+  };
+
 
   render() {
     return (
       <div>
         <h1>KanbanBox</h1>
         <h3>{this.state.toDo.name}</h3>
-        <ToDoBox data={this.state.toDo}/>
-        <DoingBox data={this.state.doing}/>
-        <DoneBox data={this.state.done}/>
+        <ToDoBox data={this.state.toDo} handler={this.updateHandler}/>
+        <DoingBox data={this.state.doing} handler={this.updateHandler}/>
+        <DoneBox data={this.state.done} handler={this.updateHandler}/>
       </div>
     );
   };
@@ -70,9 +81,10 @@ KanbanBox.defaultProps = {
 
 class ToDoBox extends React.Component {
   render() {
+    var that = this;
     var taskListNode = this.props.data.map(function(taskDataItem){
       return (
-        <TaskFormatter name={taskDataItem.name} author={taskDataItem.author} key={taskDataItem._id} uniqueID={taskDataItem._id} description={taskDataItem.description}/>
+        <TaskFormatter name={taskDataItem.name} author={taskDataItem.author} key={taskDataItem._id} uniqueID={taskDataItem._id} description={taskDataItem.description} handler={that.props.handler}/>
       )
     });
     return (
@@ -87,10 +99,10 @@ class ToDoBox extends React.Component {
 
 class DoingBox extends React.Component {
   render() {
+    var that = this;
       var taskListNode = this.props.data.map(function(taskDataItem){
-        console.log(taskDataItem)
       return (
-        <TaskFormatter name={taskDataItem.name} author={taskDataItem.author} uniqueID={taskDataItem._id} description={taskDataItem.description}/>
+        <TaskFormatter name={taskDataItem.name} author={taskDataItem.author} uniqueID={taskDataItem._id} description={taskDataItem.description} handler={that.props.handler}/>
       )
 
     });
@@ -106,9 +118,10 @@ class DoingBox extends React.Component {
 
 class DoneBox extends React.Component {
   render() {
+    var that = this;
       var taskListNode = this.props.data.map(function(taskDataItem){
       return (
-        <TaskFormatter uniqueID={taskDataItem._id} name={taskDataItem.name} author={taskDataItem.author}  description={taskDataItem.description}/>
+        <TaskFormatter uniqueID={taskDataItem._id} name={taskDataItem.name} author={taskDataItem.author}  description={taskDataItem.description} handler={that.props.handler}/>
       )
     });
     return (
@@ -130,7 +143,6 @@ class TaskFormatter extends React.Component {
   }
 
   doingStatus () {
-    console.log(this.props);
     const req = new XMLHttpRequest();
     req.open('PUT', `/tasks/${this.props.uniqueID}`);
     req.setRequestHeader("Content-Type", "application/json")
@@ -140,9 +152,9 @@ class TaskFormatter extends React.Component {
       "description": `${this.props.description}`,
       "status": "doing"
     }));
+    this.props.handler();
   }
   doneStatus () {
-    console.log(this.props);
     const req = new XMLHttpRequest();
     req.open('PUT', `/tasks/${this.props.uniqueID}`);
     req.setRequestHeader("Content-Type", "application/json")
@@ -152,9 +164,10 @@ class TaskFormatter extends React.Component {
       "description": `${this.props.description}`,
       "status": "done"
     }));
+    console.log(this.props);
+    this.props.handler();
   }
   toDoStatus () {
-    console.log(this.props);
     const req = new XMLHttpRequest();
     req.open('PUT', `/tasks/${this.props.uniqueID}`);
     req.setRequestHeader("Content-Type", "application/json")
@@ -164,7 +177,10 @@ class TaskFormatter extends React.Component {
       "description": `${this.props.description}`,
       "status": "to-do"
     }));
+    this.props.handler();
   }
+
+
   render() {
     return (
       <div className='taskItem'>
