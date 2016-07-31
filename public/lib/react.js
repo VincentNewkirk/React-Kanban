@@ -7,7 +7,6 @@ class KanbanBox extends React.Component {
       toDo: [],
       doing: [],
       done: [],
-      test: "",
     }
     this.onMongoData = this.onMongoData.bind(this);
     this.updateHandler = this.updateHandler.bind(this);
@@ -52,10 +51,6 @@ class KanbanBox extends React.Component {
     this.loadDataFromMongo();
   };
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-
-  };
 
 
   render() {
@@ -143,7 +138,13 @@ class TaskFormatter extends React.Component {
   }
 
   doingStatus () {
+    var that = this;
     const req = new XMLHttpRequest();
+    req.addEventListener('load', function(){
+      if(this.responseText){
+        that.props.handler()
+      }
+    });
     req.open('PUT', `/tasks/${this.props.uniqueID}`);
     req.setRequestHeader("Content-Type", "application/json")
     req.send(JSON.stringify({
@@ -155,7 +156,13 @@ class TaskFormatter extends React.Component {
     this.props.handler();
   }
   doneStatus () {
+    var that = this;
     const req = new XMLHttpRequest();
+    req.addEventListener('load', function(){
+      if(this.responseText){
+        that.props.handler()
+      }
+    });
     req.open('PUT', `/tasks/${this.props.uniqueID}`);
     req.setRequestHeader("Content-Type", "application/json")
     req.send(JSON.stringify({
@@ -164,11 +171,15 @@ class TaskFormatter extends React.Component {
       "description": `${this.props.description}`,
       "status": "done"
     }));
-    console.log(this.props);
-    this.props.handler();
   }
   toDoStatus () {
+    var that = this;
     const req = new XMLHttpRequest();
+    req.addEventListener('load', function(){
+      if(this.responseText){
+        that.props.handler()
+      }
+    });
     req.open('PUT', `/tasks/${this.props.uniqueID}`);
     req.setRequestHeader("Content-Type", "application/json")
     req.send(JSON.stringify({
@@ -177,7 +188,6 @@ class TaskFormatter extends React.Component {
       "description": `${this.props.description}`,
       "status": "to-do"
     }));
-    this.props.handler();
   }
 
 
