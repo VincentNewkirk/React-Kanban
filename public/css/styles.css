@@ -1,7 +1,7 @@
 /* @import 'partials/clearfix'; */
 /* @import 'partials/reset'; */
 * {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   text-align: center; }
 
 body {
@@ -10,13 +10,30 @@ body {
   text-align: center;
   align-items: center;
   padding: 2em; }
+  @media only screen and (min-width: 900px) {
+    body div#titleDiv {
+      background-color: #f1f1f1;
+      display: block;
+      width: 100%;
+      font-size: 1.5em; }
+    body div#colOne {
+      background-color: #ffffff;
+      flex: 1 1 30%;
+      /* margin: auto; */ }
+    body div#colTwo {
+      background-color: #dcdcdc;
+      flex: 1 1 30%;
+      /* margin: auto; */ }
+    body div#colThree {
+      background-color: #cdcdcd;
+      flex: 1 1 30%;
+      /* margin: auto; */ } }
 
 h1 {
-  font-family: 'Rajdhani', sans-serif;
   font-weight: 700; }
 
 div {
-  padding: 10px; }
+  padding: 8px; }
 
 div#mainDiv {
   background-color: #000000;
@@ -25,31 +42,36 @@ div#mainDiv {
   text-align: center; }
 
 div#titleDiv {
-  background-color: #a0a0a0;
+  background-color: #ffffff;
   display: block;
-  width: 100%; }
+  width: 100%;
+  font-size: 1.5em; }
 
 div#colOne {
-  background-color: #ffffff;
-  flex: 1 1 auto;
-  /* margin: auto; */ }
+  background-color: #f1f1f1;
+  flex: 1 1 90%; }
 
 div#colTwo {
   background-color: #dcdcdc;
-  flex: 1 1 auto;
-  /* margin: auto; */ }
+  flex: 1 1 90%; }
 
 div#colThree {
   background-color: #cdcdcd;
-  flex: 1 1 auto;
-  /* margin: auto; */ }
+  flex: 1 1 90%; }
 
 .colHeader {
   font-size: 2em;
-  text-decoration: underline;
+  font-weight: 700;
   color: #000000; }
 
 .taskItem {
-  border: 1px black dashed;
-  border-radius: 5%;
-  margin: 5px; }
+  background-color: #ffffff;
+  border: 1px black solid;
+  border-radius: 2%;
+  margin: 10px; }
+
+.taskItemName {
+  font-size: 1.5em;
+  line-height: 10%;
+  font-weight: 700;
+  margin: 0px; }

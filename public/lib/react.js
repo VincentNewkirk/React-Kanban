@@ -195,9 +195,9 @@ class TaskFormatter extends React.Component {
   render() {
     return (
       <div className='taskItem'>
-        <h3>{this.props.name}</h3>
-        <p>{this.props.author}</p>
-        <p>{this.props.description}</p>
+        <span className="taskItemName">{this.props.name}</span>
+        <p>Created By: {this.props.author}</p>
+        <p>Description: {this.props.description}</p>
         <button onClick={this.doingStatus}> Doing </button>
         <button onClick={this.doneStatus}> Done </button>
         <button onClick={this.toDoStatus}> To Do</button>
