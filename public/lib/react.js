@@ -1,6 +1,8 @@
 
 'use strict';
 
+/*document.write("It works.");*/
+
 class KanbanBox extends React.Component {
   constructor() {
     super();
@@ -49,9 +51,7 @@ class KanbanBox extends React.Component {
     return (
 
       <div id="mainDiv">
-
         <div id="titleDiv"><h1>KanbanBox</h1></div>
-
         <h3>{this.state.toDo.name}</h3>
         <ToDoBox data={this.state.toDo}/>
         <DoingBox data={this.state.doing}/>
@@ -78,7 +78,7 @@ class ToDoBox extends React.Component {
     });
     return (
       <div id="colOne">
-        <div>To Do Tasks
+        <div><span className="colHeader">To Do Tasks</span>
         { taskListNode }
         </div>
       </div>
@@ -97,7 +97,7 @@ class DoingBox extends React.Component {
     });
     return (
       <div id="colTwo">
-        <div>Doing Tasks
+        <div><span className="colHeader">Doing Tasks</span>
         {taskListNode}
         </div>
       </div>
@@ -114,7 +114,7 @@ class DoneBox extends React.Component {
     });
     return (
       <div id="colThree">
-        <div>Done Tasks
+        <div><span className="colHeader">Done Tasks</span>
         {taskListNode}
         </div>
       </div>
