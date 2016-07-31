@@ -1,77 +1,110 @@
+// Resets, Clearfix, etc
 /* @import 'partials/clearfix'; */
 /* @import 'partials/reset'; */
-* {
+
+// Variables
+$bgColor: #b5b5b5;
+
+// Media Query Ranges
+$medium: "only screen and (min-width: 600px)";
+$large: "only screen and (min-width: 900px)";
+
+*{
   font-family: 'Open Sans', sans-serif;
-  text-align: center; }
+  text-align:center;
+}
 
 body {
   color: #000000;
-  background-color: #b5b5b5;
+  background-color: $bgColor;
   text-align: center;
   align-items: center;
-  padding: 2em; }
-  @media only screen and (min-width: 900px) {
-    body div#titleDiv {
+  padding: 2em;
+
+  @media #{$medium}{
+  }
+
+  @media #{$large}{
+    div#titleDiv {
       background-color: #f1f1f1;
       display: block;
       width: 100%;
-      font-size: 1.5em; }
-    body div#colOne {
+      font-size: 1.5em;
+    }
+
+    div#colOne {
       background-color: #ffffff;
       flex: 1 1 30%;
-      /* margin: auto; */ }
-    body div#colTwo {
+      /* margin: auto; */
+    }
+
+    div#colTwo {
       background-color: #dcdcdc;
       flex: 1 1 30%;
-      /* margin: auto; */ }
-    body div#colThree {
+      /* margin: auto; */
+    }
+
+    div#colThree {
       background-color: #cdcdcd;
       flex: 1 1 30%;
-      /* margin: auto; */ } }
+      /* margin: auto; */
+    }
+  }
+}
 
 h1 {
-  font-weight: 700; }
+  font-weight: 700;
+}
 
 div {
-  padding: 8px; }
+  padding: 8px;
+}
 
 div#mainDiv {
   background-color: #000000;
-  display: flex;
+  display:flex;
   flex-flow: row wrap;
-  text-align: center; }
+  text-align: center;
+}
 
 div#titleDiv {
   background-color: #ffffff;
   display: block;
   width: 100%;
-  font-size: 1.5em; }
+  font-size: 1.5em;
+}
 
 div#colOne {
   background-color: #f1f1f1;
-  flex: 1 1 90%; }
+  flex: 1 1 90%;
+}
 
 div#colTwo {
   background-color: #dcdcdc;
-  flex: 1 1 90%; }
+  flex: 1 1 90%;
+}
 
 div#colThree {
   background-color: #cdcdcd;
-  flex: 1 1 90%; }
+  flex: 1 1 90%;
+}
 
 .colHeader {
   font-size: 2em;
   font-weight: 700;
-  color: #000000; }
+  color: #000000;
+}
 
 .taskItem {
   background-color: #ffffff;
   border: 1px black solid;
   border-radius: 2%;
-  margin: 10px; }
+  margin: 10px;
+}
 
 .taskItemName {
   font-size: 1.5em;
   line-height: 10%;
   font-weight: 700;
-  margin: 0px; }
+  margin: 0px;
+}

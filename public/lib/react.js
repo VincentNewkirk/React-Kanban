@@ -1,5 +1,7 @@
 'use strict';
 
+/*document.write("It works.");*/
+
 class KanbanBox extends React.Component {
   constructor() {
     super();
@@ -11,8 +13,6 @@ class KanbanBox extends React.Component {
     this.onMongoData = this.onMongoData.bind(this);
     this.updateHandler = this.updateHandler.bind(this);
   }
-
-
 
   onMongoData(data){
     const parsedMongoData = JSON.parse(data.currentTarget.response);
@@ -55,8 +55,9 @@ class KanbanBox extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>KanbanBox</h1>
+
+      <div id="mainDiv">
+        <div id="titleDiv"><h1>KanbanBox</h1></div>
         <h3>{this.state.toDo.name}</h3>
         <ToDoBox data={this.state.toDo} handler={this.updateHandler}/>
         <DoingBox data={this.state.doing} handler={this.updateHandler}/>
@@ -83,8 +84,8 @@ class ToDoBox extends React.Component {
       )
     });
     return (
-      <div>
-        <div>To Do Tasks
+      <div id="colOne">
+        <div><span className="colHeader">To Do Tasks</span>
         { taskListNode }
         </div>
       </div>
@@ -102,8 +103,8 @@ class DoingBox extends React.Component {
 
     });
     return (
-      <div>
-        <div>Doing Tasks
+      <div id="colTwo">
+        <div><span className="colHeader">Doing Tasks</span>
         {taskListNode}
         </div>
       </div>
@@ -120,8 +121,8 @@ class DoneBox extends React.Component {
       )
     });
     return (
-      <div>
-        <div>Done Tasks
+      <div id="colThree">
+        <div><span className="colHeader">Done Tasks</span>
         {taskListNode}
         </div>
       </div>
@@ -194,9 +195,9 @@ class TaskFormatter extends React.Component {
   render() {
     return (
       <div className='taskItem'>
-        <h3>{this.props.name}</h3>
-        <p>{this.props.author}</p>
-        <p>{this.props.description}</p>
+        <span className="taskItemName">{this.props.name}</span>
+        <p>Created By: {this.props.author}</p>
+        <p>Description: {this.props.description}</p>
         <button onClick={this.doingStatus}> Doing </button>
         <button onClick={this.doneStatus}> Done </button>
         <button onClick={this.toDoStatus}> To Do</button>
