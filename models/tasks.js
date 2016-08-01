@@ -10,5 +10,4 @@ const TaskSchema = new Schema({
   status: {type: String, default: 'to-do' }
 });
 
-
 module.exports = mongoose.model('Tasks', TaskSchema);
