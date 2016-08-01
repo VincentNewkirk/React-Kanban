@@ -77,7 +77,69 @@ KanbanBox.defaultProps = {
   data: []
 }
 
+class NewTaskForm extends React.Component {
+  // var that = this;
+  // postTask() {
+  //   if(this.responseText){
+  //     that.props.handler()
+  //   }
+  //   });
+
+  constructor() {
+    super();
+    this.postTask = this.postTask.bind(this);
+  }
+
+
+
+  postTask() {
+    var that = this;
+    const author = document.getElementById('authorInput').value;
+    const name = document.getElementById('titleInput').value;
+    const assigned = document.getElementById('assignedInput').value;
+    const description = document.getElementById('descriptionInput').value;
+    const priority = document.getElementById('priorityInput').value;
+    const req = new XMLHttpRequest();
+    req.addEventListener('load', function(){
+      if(this.responseText){
+        that.props.handler()
+      }
+    });
+    req.open('POST', `/tasks`);
+    req.setRequestHeader("Content-Type", "application/json")
+    req.send(JSON.stringify({
+      "name": `${name}`,
+      "author": `${author}`,
+      "description": `${description}`,
+      "assigned": `${assigned}`,
+      "priority": `${priority}`,
+    }));
+  }
+
+  render() {
+    return (
+      <div>
+        <h3> New Task </h3>
+        <input type='text' id='authorInput'name='author' placeholder="Created By:"/>
+        <input type='text' id='titleInput'name='title' placeholder="Title"/>
+        <input type='text' id='assignedInput'name='assigned' placeholder="Assigned To" />
+        <input type='text' id='descriptionInput' name='description' placeholder='Task Description' />
+        <select id='priorityInput' name='priority' value="Medium">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="Blocked">Blocker</option>
+        </select>
+        <button onClick={this.postTask} type="Submit">Submit</button>
+      </div>
+    )
+  };
+};
+
 class ToDoBox extends React.Component {
+  postTask () {
+
+  }
   render() {
     var that = this;
     var taskListNode = this.props.data.map(function(taskDataItem){
@@ -96,10 +158,13 @@ class ToDoBox extends React.Component {
         <div><span className="colHeader">To Do Tasks</span>
         { taskListNode }
         </div>
+        <NewTaskForm handler={this.props.handler}/>
+
       </div>
     );
   };
 };
+
 
 class DoingBox extends React.Component {
   render() {
@@ -235,7 +300,6 @@ class TaskFormatter extends React.Component {
         {this.props.name}</span>
         <button onClick={this.deleteTask} className="deleteButton"> X </button>
         <p>Created By: {this.props.author}</p>
-        <p>Description: {this.props.description}</p>
         <p>Assigned To: {this.props.assigned}</p>
         <p>Priority Level: {this.props.priority}</p>
         <p>{this.props.description}</p>
