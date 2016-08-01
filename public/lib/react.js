@@ -136,6 +136,7 @@ class TaskFormatter extends React.Component {
     this.doingStatus = this.doingStatus.bind(this);
     this.doneStatus = this.doneStatus.bind(this);
     this.toDoStatus = this.toDoStatus.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   doingStatus () {
@@ -154,7 +155,6 @@ class TaskFormatter extends React.Component {
       "description": `${this.props.description}`,
       "status": "doing"
     }));
-    this.props.handler();
   }
   doneStatus () {
     var that = this;
@@ -191,13 +191,27 @@ class TaskFormatter extends React.Component {
     }));
   }
 
+  deleteTask () {
+    var that = this;
+    const req = new XMLHttpRequest();
+    req.addEventListener('load', function(){
+      if(this.responseText){
+        that.props.handler()
+      }
+    });
+    req.open('DELETE', `/tasks/${this.props.uniqueID}`);
+    /*req.setRequestHeader("Content-Type", "application/json")*/
+    req.send();
+  }
 
   render() {
     return (
       <div className='taskItem'>
-        <span className="taskItemName">{this.props.name}</span>
+        <span className="taskItemName">
+        {this.props.name}</span>
+        <button onClick={this.deleteTask} className="deleteButton"> X </button>
         <p>Created By: {this.props.author}</p>
-        <p>Description: {this.props.description}</p>
+        <p>{this.props.description}</p>
         <button onClick={this.doingStatus}> Doing </button>
         <button onClick={this.doneStatus}> Done </button>
         <button onClick={this.toDoStatus}> To Do</button>
@@ -205,7 +219,6 @@ class TaskFormatter extends React.Component {
     );
   };
 };
-
 
 ReactDOM.render(
   <KanbanBox/>,

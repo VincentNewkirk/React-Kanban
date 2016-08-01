@@ -5,29 +5,24 @@
   text-align: center; }
 
 body {
-  color: #000000;
-  background-color: #b5b5b5;
+  background-color: #a0a0a0;
   text-align: center;
   align-items: center;
-  padding: 2em; }
+  padding: 10px; }
   @media only screen and (min-width: 900px) {
     body div#titleDiv {
       background-color: #f1f1f1;
       display: block;
       width: 100%;
-      font-size: 1.5em; }
+      font-size: 1.5em;
+      -webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+      transition: width 2s, height 2s, background-color 2s, transform 2s; }
     body div#colOne {
-      background-color: #ffffff;
-      flex: 1 1 30%;
-      /* margin: auto; */ }
+      flex: 1 1 30%; }
     body div#colTwo {
-      background-color: #dcdcdc;
-      flex: 1 1 30%;
-      /* margin: auto; */ }
+      flex: 1 1 30%; }
     body div#colThree {
-      background-color: #cdcdcd;
-      flex: 1 1 30%;
-      /* margin: auto; */ } }
+      flex: 1 1 30%; } }
 
 h1 {
   font-weight: 700; }
@@ -42,10 +37,16 @@ div#mainDiv {
   text-align: center; }
 
 div#titleDiv {
-  background-color: #ffffff;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0000ff), to(#00008b));
+  background: -webkit-linear-gradient(top, #0000ff, #00008b);
+  background: -moz-linear-gradient(top, #0000ff, #00008b);
+  background: -ms-linear-gradient(top, #0000ff, #00008b);
+  background: -o-linear-gradient(top, #0000ff, #00008b);
+  border-bottom: 3px #ffffff solid;
+  color: #ffffff;
   display: block;
   width: 100%;
-  font-size: 1.5em; }
+  font-size: 1em; }
 
 div#colOne {
   background-color: #f1f1f1;
@@ -68,10 +69,48 @@ div#colThree {
   background-color: #ffffff;
   border: 1px black solid;
   border-radius: 2%;
-  margin: 10px; }
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis; }
 
 .taskItemName {
   font-size: 1.5em;
   line-height: 10%;
   font-weight: 700;
   margin: 0px; }
+
+.deleteButton {
+  background: #cc0000;
+  background-image: -webkit-linear-gradient(top, #cc0000, #800000);
+  background-image: -moz-linear-gradient(top, #cc0000, #800000);
+  background-image: -ms-linear-gradient(top, #cc0000, #800000);
+  background-image: -o-linear-gradient(top, #cc0000, #800000);
+  background-image: linear-gradient(to bottom, #cc0000, #800000);
+  color: #ffffff;
+  text-align: center;
+  padding: 5px;
+  font-weight: 700;
+  border: 0px;
+  border-radius: 15%;
+  margin: 3px;
+  position: absolute;
+  top: 0px;
+  right: 0px; }
+
+.deleteButton:hover {
+  background: #ff0000;
+  background-image: -webkit-linear-gradient(top, #ff0000, #990000);
+  background-image: -moz-linear-gradient(top, #ff0000, #990000);
+  background-image: -ms-linear-gradient(top, #ff0000, #990000);
+  background-image: -o-linear-gradient(top, #ff0000, #990000);
+  background-image: linear-gradient(to bottom, #ff0000, #990000);
+  padding: 5px;
+  font-weight: 700;
+  border: 0px;
+  border-radius: 15%;
+  margin: 3px;
+  position: absolute;
+  top: 0px;
+  right: 0px; }
