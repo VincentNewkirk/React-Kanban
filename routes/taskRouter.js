@@ -7,6 +7,8 @@ Router.post('/', (req, res) => {
   task.name = req.body.name;
   task.author = req.body.author;
   task.description = req.body.description;
+  task.priority = req.body.priority;
+  task.assigned = req.body.assigned;
 
   task.save( err => {
     if(err)
@@ -25,11 +27,12 @@ Router.get('/', (req, res) => {
 
 Router.put('/:id', (req, res) => {
   db.findById(req.params.id, (err, task) => {
-    console.log(req.body);
     task.name = req.body.name;
     task.author = req.body.author;
     task.description = req.body.description;
     task.status = req.body.status;
+    task.priority = req.body.priority;
+    task.assigned = req.body.assigned;
 
     task.save(function(err){
       if (err) {
