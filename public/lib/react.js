@@ -28,9 +28,6 @@ class KanbanBox extends React.Component {
     const doneData = parsedMongoData.filter((el, index) => {
       return parsedMongoData[index].status === "done"
     });
-    console.log(doingData, "<---> DOING DATA");
-    console.log(toDoData, "<---> TODO DATA");
-    console.log(doneData, "<---> DONE DATA");
     this.setState({
       toDo: toDoData,
       doing: doingData,
