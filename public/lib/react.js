@@ -1,7 +1,5 @@
 'use strict';
 
-/*document.write("It works.");*/
-
 class KanbanBox extends React.Component {
   constructor() {
     super();
@@ -53,11 +51,8 @@ class KanbanBox extends React.Component {
     this.loadDataFromMongo();
   };
 
-
-
   render() {
     return (
-
       <div id="mainDiv">
         <div id="titleDiv"><h1>KanbanBox</h1></div>
         <h3>{this.state.toDo.name}</h3>

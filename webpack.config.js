@@ -2,8 +2,12 @@ var path = require('path');
 var webpack = require('webpack');
 
 const config = {
-  entry: './public/lib/react.js',
-  output: { path: __dirname, filename: 'bundle.js' },
+  entry: [
+    'webpack/hot/dev-server',
+    'webpack-hot-middleware/client?reload=true',
+    './public/lib/react.js'
+  ],
+  output: { path: '/', publicPath: 'http://localhost:3000/', filename: 'bundle.js' },
   module: {
     loaders: [
       {
@@ -16,6 +20,17 @@ const config = {
       }
     ]
   },
+
+  plugins: [
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin(),
+      //new webpack.ResolverPlugin new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin 'bower.json', ['main']
+      //new webpackStats 'webpack.json'
+  ],
+  target: 'web'
+
+
 };
 
 module.exports = config;
