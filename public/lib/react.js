@@ -78,13 +78,6 @@ KanbanBox.defaultProps = {
 }
 
 class NewTaskForm extends React.Component {
-  // var that = this;
-  // postTask() {
-  //   if(this.responseText){
-  //     that.props.handler()
-  //   }
-  //   });
-
   constructor() {
     super();
     this.postTask = this.postTask.bind(this);
