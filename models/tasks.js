@@ -6,8 +6,9 @@ const TaskSchema = new Schema({
   author: String,
   name: String,
   description: String,
-  date: {type: Date, default: Date.now},
-  status: {type: String, default: 'to-do' }
+  status: {type: String, default: 'to-do' },
+  priority: String,
+  assigned: String,
 });
 
 

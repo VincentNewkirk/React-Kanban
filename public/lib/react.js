@@ -23,12 +23,14 @@ class KanbanBox extends React.Component {
 
     const doingData = parsedMongoData.filter((el, index) => {
       return parsedMongoData[index].status === "doing"
-    })
+    });
 
     const doneData = parsedMongoData.filter((el, index) => {
       return parsedMongoData[index].status === "done"
-    })
-
+    });
+    console.log(doingData, "<---> DOING DATA");
+    console.log(toDoData, "<---> TODO DATA");
+    console.log(doneData, "<---> DONE DATA");
     this.setState({
       toDo: toDoData,
       doing: doingData,
@@ -80,7 +82,13 @@ class ToDoBox extends React.Component {
     var that = this;
     var taskListNode = this.props.data.map(function(taskDataItem){
       return (
-        <TaskFormatter name={taskDataItem.name} author={taskDataItem.author} key={taskDataItem._id} uniqueID={taskDataItem._id} description={taskDataItem.description} handler={that.props.handler}/>
+        <TaskFormatter name={taskDataItem.name}
+        author={taskDataItem.author} key={taskDataItem._id}
+        uniqueID={taskDataItem._id}
+        description={taskDataItem.description}
+        assigned={taskDataItem.assigned}
+        priority={taskDataItem.priority}
+        handler={that.props.handler}/>
       )
     });
     return (
@@ -98,7 +106,13 @@ class DoingBox extends React.Component {
     var that = this;
       var taskListNode = this.props.data.map(function(taskDataItem){
       return (
-        <TaskFormatter name={taskDataItem.name} author={taskDataItem.author} uniqueID={taskDataItem._id} description={taskDataItem.description} handler={that.props.handler}/>
+        <TaskFormatter name={taskDataItem.name}
+        author={taskDataItem.author}
+        uniqueID={taskDataItem._id}
+        description={taskDataItem.description}
+        assigned={taskDataItem.assigned}
+        priority={taskDataItem.priority}
+        handler={that.props.handler}/>
       )
 
     });
@@ -117,7 +131,12 @@ class DoneBox extends React.Component {
     var that = this;
       var taskListNode = this.props.data.map(function(taskDataItem){
       return (
-        <TaskFormatter uniqueID={taskDataItem._id} name={taskDataItem.name} author={taskDataItem.author}  description={taskDataItem.description} handler={that.props.handler}/>
+        <TaskFormatter uniqueID={taskDataItem._id}
+        name={taskDataItem.name} author={taskDataItem.author}
+        description={taskDataItem.description}
+        assigned={taskDataItem.assigned}
+        priority={taskDataItem.priority}
+        handler={that.props.handler}/>
       )
     });
     return (
@@ -152,6 +171,8 @@ class TaskFormatter extends React.Component {
       "name": `${this.props.name}`,
       "author": `${this.props.author}`,
       "description": `${this.props.description}`,
+      "assigned": `${this.props.assigned}`,
+      "priority": `${this.props.priority}`,
       "status": "doing"
     }));
     this.props.handler();
@@ -170,6 +191,8 @@ class TaskFormatter extends React.Component {
       "name": `${this.props.name}`,
       "author": `${this.props.author}`,
       "description": `${this.props.description}`,
+      "assigned": `${this.props.assigned}`,
+      "priority": `${this.props.priority}`,
       "status": "done"
     }));
   }
@@ -187,6 +210,8 @@ class TaskFormatter extends React.Component {
       "name": `${this.props.name}`,
       "author": `${this.props.author}`,
       "description": `${this.props.description}`,
+      "assigned": `${this.props.assigned}`,
+      "priority": `${this.props.priority}`,
       "status": "to-do"
     }));
   }
@@ -198,9 +223,11 @@ class TaskFormatter extends React.Component {
         <span className="taskItemName">{this.props.name}</span>
         <p>Created By: {this.props.author}</p>
         <p>Description: {this.props.description}</p>
+        <p>Assigned To: {this.props.assigned}</p>
+        <p>Priority Level: {this.props.priority}</p>
+        <button onClick={this.toDoStatus}> To Do</button>
         <button onClick={this.doingStatus}> Doing </button>
         <button onClick={this.doneStatus}> Done </button>
-        <button onClick={this.toDoStatus}> To Do</button>
       </div>
     );
   };
