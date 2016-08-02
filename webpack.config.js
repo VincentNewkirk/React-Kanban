@@ -17,9 +17,17 @@ const config = {
         query: {
           presets: ['es2015', 'react']
         }
-      }
-    ]
-  },
+      },
+      {
+      test: /(\.scss$|\.css$)/,
+      loaders: [
+        'style',
+        'css?modules&importLoaders=1' +
+        '&localIdentName=[path][local]__[hash:base64:5]!sass',
+        'sass',
+            ],
+          }],
+        },
 
   plugins: [
       new webpack.optimize.OccurenceOrderPlugin(),
