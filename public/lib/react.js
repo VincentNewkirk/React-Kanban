@@ -1,5 +1,7 @@
 'use strict';
 
+require("../.././scss/styles.scss");
+
 class KanbanBox extends React.Component {
   constructor() {
     super();
@@ -54,7 +56,7 @@ class KanbanBox extends React.Component {
   render() {
     return (
       <div id="mainDiv">
-        <div id="titleDiv"><h1>KanbanBox</h1></div>
+        <div id="titleDiv"><h1>KanbanBoard</h1></div>
         <h3>{this.state.toDo.name}</h3>
         <ToDoBox data={this.state.toDo} handler={this.updateHandler}/>
         <DoingBox data={this.state.doing} handler={this.updateHandler}/>
@@ -77,8 +79,6 @@ class NewTaskForm extends React.Component {
     super();
     this.postTask = this.postTask.bind(this);
   }
-
-
 
   postTask() {
     var that = this;
@@ -294,12 +294,48 @@ class TaskFormatter extends React.Component {
         <button onClick={this.toDoStatus}> To Do</button>
         <button onClick={this.doingStatus}> Doing </button>
         <button onClick={this.doneStatus}> Done </button>
+        <div id="showOrHide"></div>
+        <ShowHide handler={this.props.handler}/>
       </div>
     );
   };
 };
 
+
+var Child = React.createClass({
+  render: function() {
+    return (<div>Here will be the edit fields</div>);
+  }
+});
+
+var ShowHide = React.createClass({
+  getInitialState: function () {
+    return { childVisible: false };
+  },
+
+  render: function() {
+    return(
+      <div>
+        <div id="editButton" onClick={this.onClick}>
+          EDIT
+        </div>
+        {
+          this.state.childVisible
+            ? <Child />
+            : null
+        }
+      </div>
+    )
+  },
+
+  onClick: function() {
+    this.setState({childVisible: !this.state.childVisible});
+  }
+});
+
 ReactDOM.render(
   <KanbanBox/>,
   document.getElementById('content')
-)
+);
+
+
