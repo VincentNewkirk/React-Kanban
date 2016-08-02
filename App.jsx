@@ -3,6 +3,8 @@ import ToDoBox from './kanbanReact/ToDoBox.jsx';
 import DoingBox from './kanbanReact/DoingBox.jsx';
 import DoneBox from './kanbanReact/DoneBox.jsx';
 
+import style from "./scss/styles.scss";
+
 class KanbanBox extends React.Component {
   constructor() {
     super();
@@ -17,6 +19,7 @@ class KanbanBox extends React.Component {
   }
 
   onMongoData(data){
+    console.log(data);
     const parsedMongoData = JSON.parse(data.currentTarget.response);
 
     const toDoData = parsedMongoData.filter(function(el, index){
@@ -93,4 +96,4 @@ KanbanBox.defaultProps = {
   data: []
 }
 
-//export default App;
+export default KanbanBox;

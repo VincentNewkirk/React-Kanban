@@ -1,4 +1,6 @@
 import React from 'react';
+import ShowHide from './ShowHide.jsx';
+import style from ".././scss/styles.scss";
 
 class TaskFormatter extends React.Component {
   constructor() {

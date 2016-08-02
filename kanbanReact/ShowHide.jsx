@@ -1,8 +1,14 @@
 import React from 'react';
+import EditForm from './EditForm.jsx';
+import style from ".././scss/styles.scss";
 
 var ShowHide = React.createClass({
   getInitialState: function () {
     return { showEditForm: false };
+  },
+
+  onClick: function() {
+    this.setState({showEditForm: !this.state.showEditForm});
   },
 
   render: function() {
@@ -28,11 +34,8 @@ var ShowHide = React.createClass({
         }
       </div>
     )
-  },
-
-  onClick: function() {
-    this.setState({showEditForm: !this.state.showEditForm});
   }
+
 });
 
 export default ShowHide;

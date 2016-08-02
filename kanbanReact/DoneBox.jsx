@@ -1,4 +1,6 @@
 import React from 'react';
+import TaskFormatter from './TaskFormatter.jsx';
+import style from ".././scss/styles.scss";
 
 class DoneBox extends React.Component {
   render() {

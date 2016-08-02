@@ -1,4 +1,5 @@
 import React from 'react';
+import style from ".././scss/styles.scss";
 
 class EditForm extends React.Component {
   constructor() {
