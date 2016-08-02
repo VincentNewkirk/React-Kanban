@@ -318,46 +318,19 @@ class TaskFormatter extends React.Component {
         <button onClick={this.toDoStatus}> To Do</button>
         <button onClick={this.doingStatus}> Doing </button>
         <button onClick={this.doneStatus}> Done </button>
-        <ShowHide/>
+        <ShowHide author={this.props.author}
+        assigned={this.props.assigned}
+        uniqueID={this.props.uniqueID}
+        priority={this.props.priority}
+        name={this.props.name}
+        handler={this.props.handler}
+        status={this.props.status}
+        edit={this.props.edit}
+        description={this.props.description}/>
       </div>
     );
   };
 };
-
-
-
-var ShowHide = React.createClass({
-  getInitialState: function () {
-    return { showEditForm: false };
-  },
-
-  render: function() {
-    return(
-      <div>
-        <div id="editButton" onClick={this.onClick}>
-          EDIT
-        </div>
-        {
-          this.state.showEditForm
-            ? <EditForm author={this.props.author}
-              assigned={this.props.assigned}
-              uniqueID={this.props.uniqueID}
-              priority={this.props.priority}
-              name={this.props.name}
-              handler={this.props.handler}
-              status={this.props.status}
-              edit={this.props.edit}
-              description={this.props.description}/>
-            : null
-        }
-      </div>
-    )
-  },
-
-  onClick: function() {
-    this.setState({showEditForm: !this.state.showEditForm});
-  }
-});
 
 class EditForm extends React.Component {
   constructor() {
@@ -416,6 +389,48 @@ class EditForm extends React.Component {
     )
   }
 }
+
+
+
+
+var ShowHide = React.createClass({
+  getInitialState: function () {
+    return { showEditForm: false };
+  },
+
+  render: function() {
+    return(
+      <div>
+        <div id="editButton" onClick={this.onClick}>
+          EDIT
+        </div>
+        {
+          this.state.showEditForm
+            ? <EditForm
+              author={this.props.author}
+              assigned={this.props.assigned}
+              uniqueID={this.props.uniqueID}
+              priority={this.props.priority}
+              name={this.props.name}
+              handler={this.props.handler}
+              status={this.props.status}
+              edit={this.props.edit}
+              description={this.props.description}
+              />
+            : null
+        }
+      </div>
+    )
+  },
+
+  onClick: function() {
+    this.setState({showEditForm: !this.state.showEditForm});
+  }
+});
+
+
+/*
+              */
 
 ReactDOM.render(
   <KanbanBox/>,
