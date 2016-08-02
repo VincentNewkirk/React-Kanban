@@ -1,7 +1,5 @@
 'use strict';
 
-import style from "../.././scss/styles.scss";
-
 class KanbanBox extends React.Component {
   constructor() {
     super();
@@ -16,6 +14,7 @@ class KanbanBox extends React.Component {
   }
 
   onMongoData(data){
+    console.log(data);
     const parsedMongoData = JSON.parse(data.currentTarget.response);
 
     const toDoData = parsedMongoData.filter(function(el, index){
@@ -74,7 +73,7 @@ class KanbanBox extends React.Component {
   render() {
     return (
       <div id="mainDiv">
-        <div id="titleDiv"><h1>KanbanBoard</h1></div>
+        <div id="titleDiv"><h1>KanbanBox</h1></div>
         <h3>{this.state.toDo.name}</h3>
         <ToDoBox data={this.state.toDo} edit={this.editHandler} handler={this.updateHandler}/>
         <DoingBox data={this.state.doing} edit={this.editHandler} handler={this.updateHandler}/>
@@ -97,6 +96,8 @@ class NewTaskForm extends React.Component {
     super();
     this.postTask = this.postTask.bind(this);
   }
+
+
 
   postTask() {
     var that = this;
@@ -318,7 +319,7 @@ class TaskFormatter extends React.Component {
         <button onClick={this.toDoStatus}> To Do</button>
         <button onClick={this.doingStatus}> Doing </button>
         <button onClick={this.doneStatus}> Done </button>
-        <ShowHide author={this.props.author}
+        <EditForm author={this.props.author}
         assigned={this.props.assigned}
         uniqueID={this.props.uniqueID}
         priority={this.props.priority}
@@ -390,51 +391,7 @@ class EditForm extends React.Component {
   }
 }
 
-
-
-
-var ShowHide = React.createClass({
-  getInitialState: function () {
-    return { showEditForm: false };
-  },
-
-  render: function() {
-    return(
-      <div>
-        <div id="editButton" onClick={this.onClick}>
-          EDIT
-        </div>
-        {
-          this.state.showEditForm
-            ? <EditForm
-              author={this.props.author}
-              assigned={this.props.assigned}
-              uniqueID={this.props.uniqueID}
-              priority={this.props.priority}
-              name={this.props.name}
-              handler={this.props.handler}
-              status={this.props.status}
-              edit={this.props.edit}
-              description={this.props.description}
-              />
-            : null
-        }
-      </div>
-    )
-  },
-
-  onClick: function() {
-    this.setState({showEditForm: !this.state.showEditForm});
-  }
-});
-
-
-/*
-              */
-
 ReactDOM.render(
   <KanbanBox/>,
   document.getElementById('content')
-);
-
-
+)
