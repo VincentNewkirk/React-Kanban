@@ -18,7 +18,6 @@ db.once('open', function() {
   console.log('we are connected!');
 });
 
-
 var env = process.env.NODE_ENV || 'development';
 //var config;
 

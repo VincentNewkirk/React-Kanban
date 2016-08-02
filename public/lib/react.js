@@ -1,6 +1,6 @@
 'use strict';
 
-require("../.././scss/styles.scss");
+import style from "../.././scss/styles.scss";
 
 class KanbanBox extends React.Component {
   constructor() {
@@ -12,6 +12,7 @@ class KanbanBox extends React.Component {
     }
     this.onMongoData = this.onMongoData.bind(this);
     this.updateHandler = this.updateHandler.bind(this);
+    this.editHandler = this.editHandler.bind(this);
   }
 
   onMongoData(data){
@@ -28,9 +29,6 @@ class KanbanBox extends React.Component {
     const doneData = parsedMongoData.filter((el, index) => {
       return parsedMongoData[index].status === "done"
     });
-    console.log(doingData, "<---> DOING DATA");
-    console.log(toDoData, "<---> TODO DATA");
-    console.log(doneData, "<---> DONE DATA");
     this.setState({
       toDo: toDoData,
       doing: doingData,
@@ -49,6 +47,26 @@ class KanbanBox extends React.Component {
     this.loadDataFromMongo();
   }
 
+  editHandler(editCard) {
+    const req = new XMLHttpRequest();
+    req.addEventListener('load', (res) => {
+        if(JSON.parse(res.currentTarget.responseText)){
+        this.loadDataFromMongo();
+      }
+    })
+    console.log(editCard);
+    req.open('PUT', `/tasks/${editCard._id}`);
+    req.setRequestHeader("Content-Type", "application/json")
+    req.send(JSON.stringify({
+      "name": editCard.name,
+      "author": editCard.author,
+      "description": editCard.description,
+      "assigned": editCard.assigned,
+      "priority": editCard.priority,
+      "status": editCard.status,
+    }));
+  }
+
   componentDidMount() {
     this.loadDataFromMongo();
   };
@@ -58,9 +76,9 @@ class KanbanBox extends React.Component {
       <div id="mainDiv">
         <div id="titleDiv"><h1>KanbanBoard</h1></div>
         <h3>{this.state.toDo.name}</h3>
-        <ToDoBox data={this.state.toDo} handler={this.updateHandler}/>
-        <DoingBox data={this.state.doing} handler={this.updateHandler}/>
-        <DoneBox data={this.state.done} handler={this.updateHandler}/>
+        <ToDoBox data={this.state.toDo} edit={this.editHandler} handler={this.updateHandler}/>
+        <DoingBox data={this.state.doing} edit={this.editHandler} handler={this.updateHandler}/>
+        <DoneBox data={this.state.done} edit={this.editHandler} handler={this.updateHandler}/>
       </div>
     );
   };
@@ -112,7 +130,7 @@ class NewTaskForm extends React.Component {
         <input type='text' id='titleInput'name='title' placeholder="Title"/>
         <input type='text' id='assignedInput'name='assigned' placeholder="Assigned To" />
         <input type='text' id='descriptionInput' name='description' placeholder='Task Description' />
-        <select id='priorityInput' name='priority' value="Medium">
+        <select id='priorityInput' name='priority'>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">High</option>
@@ -138,6 +156,8 @@ class ToDoBox extends React.Component {
         description={taskDataItem.description}
         assigned={taskDataItem.assigned}
         priority={taskDataItem.priority}
+        status={taskDataItem.status}
+        edit={that.props.edit}
         handler={that.props.handler}/>
       )
     });
@@ -165,6 +185,8 @@ class DoingBox extends React.Component {
         description={taskDataItem.description}
         assigned={taskDataItem.assigned}
         priority={taskDataItem.priority}
+        edit={that.props.edit}
+        status={taskDataItem.status}
         handler={that.props.handler}/>
       )
 
@@ -189,6 +211,8 @@ class DoneBox extends React.Component {
         description={taskDataItem.description}
         assigned={taskDataItem.assigned}
         priority={taskDataItem.priority}
+        edit={that.props.edit}
+        status={taskDataItem.status}
         handler={that.props.handler}/>
       )
     });
@@ -294,23 +318,17 @@ class TaskFormatter extends React.Component {
         <button onClick={this.toDoStatus}> To Do</button>
         <button onClick={this.doingStatus}> Doing </button>
         <button onClick={this.doneStatus}> Done </button>
-        <div id="showOrHide"></div>
-        <ShowHide handler={this.props.handler}/>
+        <ShowHide/>
       </div>
     );
   };
 };
 
 
-var Child = React.createClass({
-  render: function() {
-    return (<div>Here will be the edit fields</div>);
-  }
-});
 
 var ShowHide = React.createClass({
   getInitialState: function () {
-    return { childVisible: false };
+    return { showEditForm: false };
   },
 
   render: function() {
@@ -320,8 +338,16 @@ var ShowHide = React.createClass({
           EDIT
         </div>
         {
-          this.state.childVisible
-            ? <Child />
+          this.state.showEditForm
+            ? <EditForm author={this.props.author}
+              assigned={this.props.assigned}
+              uniqueID={this.props.uniqueID}
+              priority={this.props.priority}
+              name={this.props.name}
+              handler={this.props.handler}
+              status={this.props.status}
+              edit={this.props.edit}
+              description={this.props.description}/>
             : null
         }
       </div>
@@ -329,9 +355,67 @@ var ShowHide = React.createClass({
   },
 
   onClick: function() {
-    this.setState({childVisible: !this.state.childVisible});
+    this.setState({showEditForm: !this.state.showEditForm});
   }
 });
+
+class EditForm extends React.Component {
+  constructor() {
+    super();
+    this.putRequest = this.putRequest.bind(this);
+    this.handleInputUpdate = this.handleInputUpdate.bind(this);
+    this.state ={
+      author: '',
+      name: '',
+      description: '',
+      assigned: '',
+      priority: '',
+      status: '',
+      _id: '',
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      author: this.props.author,
+      name: this.props.name,
+      description: this.props.description,
+      assigned: this.props.assigned,
+      priority: this.props.priority,
+      status: this.props.status,
+      _id: this.props.uniqueID,
+    })
+  };
+
+  handleInputUpdate(event) {
+    var newState = {};
+    newState[event.target.id] = event.target.value;
+
+    this.setState(newState)
+  }
+
+  putRequest() {
+    this.props.edit(this.state);
+  }
+
+  render() {
+    return (
+      <div>
+        <p>Created By: <input onChange={this.handleInputUpdate} type='text' id='author' value={this.state.author} /></p>
+        <p>Title: <input type='text' onChange={this.handleInputUpdate} id='name' value={this.state.name} /></p>
+        <p>Assigned To: <input onChange={this.handleInputUpdate} type='text' id='assigned' value={this.state.assigned} /></p>
+        <p>Description: <input onChange={this.handleInputUpdate} type='text' id='description' value={this.state.description} /></p>
+        <select id='priority' onChange={this.handleInputUpdate} name='priority'>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="Blocker">Blocker</option>
+        </select>
+        <button type="submit" onClick={this.putRequest}>Edit</button>
+      </div>
+    )
+  }
+}
 
 ReactDOM.render(
   <KanbanBox/>,
