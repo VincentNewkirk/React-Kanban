@@ -1,16 +1,28 @@
 'use strict';
 
-import Immutable from 'immutable';
+import Immutable, {Map} from 'immutable';
 
-const initialState = Immutable.List();
+let initialState = Map({
+  toDo: Immutable.List(),
+  doing: Immutable.List(),
+  done: Immutable.List(),
+});
 
-const redditReducer = (state = initialState, action) => {
+const kanbanReducer = (state = initialState, action) => {
 
   let newState = state;
 
   switch(action.type){
 
     case 'SET_ITEMS':
+    console.log(action.data, 'ACTION DATA');
+      // return {
+      //   toDo: action.data[0],
+      //   doing: action.data[1],
+      //   done: action.data[2],
+      // }
+      console.log(state, 'reducer state');
+      console.log(state.toArray(action.data), 'immutable');
       return Immutable.fromJS(action.data);
 
     case 'DELETE_ITEM':
@@ -21,4 +33,4 @@ const redditReducer = (state = initialState, action) => {
   }
 }
 
-export default redditReducer;
+export default kanbanReducer;

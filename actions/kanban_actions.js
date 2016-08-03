@@ -3,6 +3,7 @@
 export const setItems = (data) => {
   dispatch({
     type: 'SET_ITEMS',
+    toDo: null,
     data
   });
 };

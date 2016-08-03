@@ -4,6 +4,7 @@ import style from ".././scss/styles.scss";
 
 class DoingBox extends React.Component {
   render() {
+    console.log(this.props, 'doing kb box');
     var that = this;
       var taskListNode = this.props.data.map(function(taskDataItem){
       return (
