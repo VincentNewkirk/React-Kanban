@@ -9,6 +9,8 @@ const reducer = combineReducers(reducers);
 const store = createStore(reducer);
 
 ReactDOM.render(
-  <KanbanBox />,
+  <Provider store={store} >
+    <KanbanBox />
+  </Provider>,
   document.getElementById('content')
 );

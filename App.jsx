@@ -2,6 +2,8 @@ import React from 'react';
 import ToDoBox from './kanbanReact/ToDoBox.jsx';
 import DoingBox from './kanbanReact/DoingBox.jsx';
 import DoneBox from './kanbanReact/DoneBox.jsx';
+import {connect} from 'react-redux';
+import Immutable from 'immutable';
 
 import style from "./scss/styles.scss";
 
@@ -19,7 +21,7 @@ class KanbanBox extends React.Component {
   }
 
   onMongoData(data){
-    console.log(data);
+    console.log(this.props);
     const parsedMongoData = JSON.parse(data.currentTarget.response);
 
     const toDoData = parsedMongoData.filter(function(el, index){
@@ -98,13 +100,14 @@ KanbanBox.defaultProps = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    data: state.redditReducer.toJS(),
+    data: state.kanban_reducer.toJS(),
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setItems: (data) => {
+      console.log(data, 'set items data argument');
       dispatch({
         type: 'SET_ITEMS',
         data
