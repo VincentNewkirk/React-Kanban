@@ -96,4 +96,23 @@ KanbanBox.defaultProps = {
   data: []
 }
 
-export default KanbanBox;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    data: state.redditReducer.toJS(),
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setItems: (data) => {
+      dispatch({
+        type: 'SET_ITEMS',
+        data
+      })
+    }
+  }
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)
+  (KanbanBox);
