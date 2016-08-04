@@ -4,8 +4,9 @@ import style from ".././scss/styles.scss";
 
 class DoingBox extends React.Component {
   render() {
+    console.log(this.props, 'doing kb box');
     var that = this;
-      var taskListNode = this.props.data.map(function(taskDataItem){
+      var taskListNode = this.props.data.map(function(taskDataItem, index){
       return (
         <TaskFormatter name={taskDataItem.name}
         author={taskDataItem.author}
@@ -15,7 +16,8 @@ class DoingBox extends React.Component {
         priority={taskDataItem.priority}
         edit={that.props.edit}
         status={taskDataItem.status}
-        handler={that.props.handler}/>
+        handler={that.props.handler}
+        index={index}/>
       )
 
     });

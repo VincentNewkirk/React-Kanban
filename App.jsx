@@ -3,24 +3,21 @@ import ToDoBox from './kanbanReact/ToDoBox.jsx';
 import DoingBox from './kanbanReact/DoingBox.jsx';
 import DoneBox from './kanbanReact/DoneBox.jsx';
 import NewTaskForm from './kanbanReact/NewTaskForm.jsx';
+import {connect} from 'react-redux';
+import Immutable from 'immutable';
 
 import style from "./scss/styles.scss";
 
 class KanbanBox extends React.Component {
   constructor() {
     super();
-    this.state = {
-      toDo: [],
-      doing: [],
-      done: [],
-    }
     this.onMongoData = this.onMongoData.bind(this);
     this.updateHandler = this.updateHandler.bind(this);
     this.editHandler = this.editHandler.bind(this);
   }
 
   onMongoData(data){
-    console.log(data);
+    var formattedData = JSON.parse(data.currentTarget.response);
     const parsedMongoData = JSON.parse(data.currentTarget.response);
 
     const toDoData = parsedMongoData.filter(function(el, index){
@@ -34,11 +31,14 @@ class KanbanBox extends React.Component {
     const doneData = parsedMongoData.filter((el, index) => {
       return parsedMongoData[index].status === "done"
     });
-    this.setState({
+
+    const sendingObj = {
       toDo: toDoData,
       doing: doingData,
       done: doneData,
-    });
+    }
+
+    this.props.setItems(sendingObj);
   }
 
   loadDataFromMongo(){
@@ -59,7 +59,6 @@ class KanbanBox extends React.Component {
         this.loadDataFromMongo();
       }
     })
-    console.log(editCard);
     req.open('PUT', `/tasks/${editCard._id}`);
     req.setRequestHeader("Content-Type", "application/json")
     req.send(JSON.stringify({
@@ -72,7 +71,7 @@ class KanbanBox extends React.Component {
     }));
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.loadDataFromMongo();
   };
 
@@ -80,10 +79,10 @@ class KanbanBox extends React.Component {
     return (
       <div id="mainDiv">
         <div id="titleDiv"><h1>KanbanBoard</h1></div>
-        <h3>{this.state.toDo.name}</h3>
-        <ToDoBox data={this.state.toDo} edit={this.editHandler} handler={this.updateHandler}/>
-        <DoingBox data={this.state.doing} edit={this.editHandler} handler={this.updateHandler}/>
-        <DoneBox data={this.state.done} edit={this.editHandler} handler={this.updateHandler}/>
+        <h3>{this.props.toDo.name}</h3>
+        <ToDoBox data={this.props.toDo} edit={this.editHandler} handler={this.updateHandler}/>
+        <DoingBox data={this.props.doing} edit={this.editHandler} handler={this.updateHandler}/>
+        <DoneBox data={this.props.done} edit={this.editHandler} handler={this.updateHandler}/>
         <NewTaskForm handler={this.props.handler}/>
       </div>
 
@@ -91,12 +90,27 @@ class KanbanBox extends React.Component {
   };
 };
 
-KanbanBox.propTypes = {
-    data: React.PropTypes.array
-};
+const mapStateToProps = (state, ownProps) => {
+  var stateData = state.kanban_reducer.toJS();
 
-KanbanBox.defaultProps = {
-  data: []
+  return {
+    toDo: stateData.toDo,
+    doing: stateData.doing,
+    done: stateData.done,
+  }
 }
 
-export default KanbanBox;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setItems: (data) => {
+      dispatch({
+        type: 'SET_ITEMS',
+        data
+      })
+    }
+  }
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)
+  (KanbanBox);

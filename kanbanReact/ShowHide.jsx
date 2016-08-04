@@ -29,6 +29,7 @@ var ShowHide = React.createClass({
               status={this.props.status}
               edit={this.props.edit}
               description={this.props.description}
+              index={this.props.index}
               />
             : null
         }

@@ -5,7 +5,7 @@ import style from ".././scss/styles.scss";
 class DoneBox extends React.Component {
   render() {
     var that = this;
-      var taskListNode = this.props.data.map(function(taskDataItem){
+      var taskListNode = this.props.data.map(function(taskDataItem, index){
       return (
         <TaskFormatter uniqueID={taskDataItem._id}
         name={taskDataItem.name} author={taskDataItem.author}
@@ -14,7 +14,8 @@ class DoneBox extends React.Component {
         priority={taskDataItem.priority}
         edit={that.props.edit}
         status={taskDataItem.status}
-        handler={that.props.handler}/>
+        handler={that.props.handler}
+        index={index}/>
       )
     });
     return (

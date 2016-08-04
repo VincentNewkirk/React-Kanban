@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import Immutable from 'immutable';
 import style from ".././scss/styles.scss";
 
 class EditForm extends React.Component {
@@ -6,19 +8,12 @@ class EditForm extends React.Component {
     super();
     this.putRequest = this.putRequest.bind(this);
     this.handleInputUpdate = this.handleInputUpdate.bind(this);
-    this.state ={
-      author: '',
-      name: '',
-      description: '',
-      assigned: '',
-      priority: '',
-      status: '',
-      _id: '',
-    }
+    this.initialData = {}
+    this.inputValues = {}
   }
 
-  componentDidMount() {
-    this.setState({
+  componentWillMount() {
+    this.initialData = {
       author: this.props.author,
       name: this.props.name,
       description: this.props.description,
@@ -26,27 +21,31 @@ class EditForm extends React.Component {
       priority: this.props.priority,
       status: this.props.status,
       _id: this.props.uniqueID,
-    })
+      index: this.props.index,
+    }
   };
 
   handleInputUpdate(event) {
-    var newState = {};
+    var newState = this.initialData;
     newState[event.target.id] = event.target.value;
 
-    this.setState(newState)
+    newState.columnName = this.props.status
+    this.props.editItem(newState);
+    this.inputValues = newState;
   }
 
   putRequest() {
-    this.props.edit(this.state);
+    console.log(this.inputValues, 'PUT RQ');
+    this.props.edit(this.inputValues);
   }
 
   render() {
     return (
       <div>
-        <p>Created By: <input onChange={this.handleInputUpdate} type='text' id='author' value={this.state.author} /></p>
-        <p>Title: <input type='text' onChange={this.handleInputUpdate} id='name' value={this.state.name} /></p>
-        <p>Assigned To: <input onChange={this.handleInputUpdate} type='text' id='assigned' value={this.state.assigned} /></p>
-        <p>Description: <input onChange={this.handleInputUpdate} type='text' id='description' value={this.state.description} /></p>
+        <p>Created By: <input onChange={this.handleInputUpdate} type='text' id='author' value={this.initialData.author} /></p>
+        <p>Title: <input type='text' onChange={this.handleInputUpdate} id='name' value={this.initialData.name} /></p>
+        <p>Assigned To: <input onChange={this.handleInputUpdate} type='text' id='assigned' value={this.initialData.assigned} /></p>
+        <p>Description: <input onChange={this.handleInputUpdate} type='text' id='description' value={this.initialData.description} /></p>
         <select id='priority' onChange={this.handleInputUpdate} name='priority'>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
@@ -59,4 +58,27 @@ class EditForm extends React.Component {
   }
 }
 
-export default EditForm;
+const mapStateToProps = (state, ownProps) => {
+  var stateData = state.kanban_reducer.toJS();
+
+  return {
+    toDo: stateData.toDo,
+    doing: stateData.doing,
+    done: stateData.done,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editItem: (data) => {
+      dispatch({
+        type: 'EDIT_ITEM',
+        data
+      })
+    }
+  }
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps)
+  (EditForm);

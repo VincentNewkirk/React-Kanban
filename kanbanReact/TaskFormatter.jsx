@@ -102,7 +102,8 @@ class TaskFormatter extends React.Component {
         handler={this.props.handler}
         status={this.props.status}
         edit={this.props.edit}
-        description={this.props.description}/>
+        description={this.props.description}
+        index={this.props.index}/>
       </div>
     );
   };
