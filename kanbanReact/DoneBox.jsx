@@ -13,6 +13,7 @@ class DoneBox extends React.Component {
         assigned={taskDataItem.assigned}
         priority={taskDataItem.priority}
         edit={that.props.edit}
+        key={taskDataItem._id}
         status={taskDataItem.status}
         handler={that.props.handler}
         index={index}/>
