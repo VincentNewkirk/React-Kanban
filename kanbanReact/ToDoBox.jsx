@@ -1,6 +1,5 @@
 import React from 'react';
 import TaskFormatter from './TaskFormatter.jsx';
-import NewTaskForm from './NewTaskForm.jsx';
 import style from ".././scss/styles.scss";
 
 class ToDoBox extends React.Component {
@@ -10,7 +9,6 @@ class ToDoBox extends React.Component {
   render() {
     var that = this;
     var taskListNode = this.props.data.map(function(taskDataItem, index){
-      console.log(index, 'to do box index');
       return (
         <TaskFormatter name={taskDataItem.name}
         author={taskDataItem.author} key={taskDataItem._id}
@@ -29,8 +27,6 @@ class ToDoBox extends React.Component {
         <div><span className="colHeader">To Do Tasks</span>
         { taskListNode }
         </div>
-        <NewTaskForm handler={this.props.handler}/>
-
       </div>
     );
   };
