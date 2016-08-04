@@ -17,7 +17,7 @@ class NewTaskForm extends React.Component {
     const req = new XMLHttpRequest();
     req.addEventListener('load', function(){
       if(this.responseText){
-        that.props.handler()
+        that.props.handler();
       }
     });
     req.open('POST', `/tasks`);

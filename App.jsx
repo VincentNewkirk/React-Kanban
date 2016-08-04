@@ -83,7 +83,7 @@ class KanbanBox extends React.Component {
         <ToDoBox data={this.props.toDo} edit={this.editHandler} handler={this.updateHandler}/>
         <DoingBox data={this.props.doing} edit={this.editHandler} handler={this.updateHandler}/>
         <DoneBox data={this.props.done} edit={this.editHandler} handler={this.updateHandler}/>
-        <NewTaskForm handler={this.props.handler}/>
+        <NewTaskForm handler={this.updateHandler}/>
       </div>
 
     );
