@@ -2,6 +2,7 @@ import React from 'react';
 import ToDoBox from './kanbanReact/ToDoBox.jsx';
 import DoingBox from './kanbanReact/DoingBox.jsx';
 import DoneBox from './kanbanReact/DoneBox.jsx';
+import NewTaskForm from './kanbanReact/NewTaskForm.jsx';
 
 import style from "./scss/styles.scss";
 
@@ -83,7 +84,9 @@ class KanbanBox extends React.Component {
         <ToDoBox data={this.state.toDo} edit={this.editHandler} handler={this.updateHandler}/>
         <DoingBox data={this.state.doing} edit={this.editHandler} handler={this.updateHandler}/>
         <DoneBox data={this.state.done} edit={this.editHandler} handler={this.updateHandler}/>
+        <NewTaskForm handler={this.props.handler}/>
       </div>
+
     );
   };
 };
