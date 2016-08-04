@@ -9,7 +9,8 @@ class ToDoBox extends React.Component {
   }
   render() {
     var that = this;
-    var taskListNode = this.props.data.map(function(taskDataItem){
+    var taskListNode = this.props.data.map(function(taskDataItem, index){
+      console.log(index, 'to do box index');
       return (
         <TaskFormatter name={taskDataItem.name}
         author={taskDataItem.author} key={taskDataItem._id}
@@ -19,7 +20,8 @@ class ToDoBox extends React.Component {
         priority={taskDataItem.priority}
         status={taskDataItem.status}
         edit={that.props.edit}
-        handler={that.props.handler}/>
+        handler={that.props.handler}
+        index={index}/>
       )
     });
     return (

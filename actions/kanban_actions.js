@@ -14,3 +14,10 @@ export const deleteItem = (data) => {
     data
   });
 };
+
+export const editItem = (data) => {
+  dispatch({
+    type: 'EDIT_ITEM',
+    data
+  });
+};

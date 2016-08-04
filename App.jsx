@@ -112,7 +112,7 @@ class KanbanBox extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   console.log(state.kanban_reducer.toJS(), 'mapStateToProps STATE');
   var stateData = state.kanban_reducer.toJS();
-  console.log(stateData, 'LUNCH TIME');
+  console.log(stateData, 'state data');
 
   return {
     // data: state.kanban_reducer._root.entries,
