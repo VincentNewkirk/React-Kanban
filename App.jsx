@@ -2,6 +2,7 @@ import React from 'react';
 import ToDoBox from './kanbanReact/ToDoBox.jsx';
 import DoingBox from './kanbanReact/DoingBox.jsx';
 import DoneBox from './kanbanReact/DoneBox.jsx';
+import NewTaskForm from './kanbanReact/NewTaskForm.jsx';
 import {connect} from 'react-redux';
 import Immutable from 'immutable';
 
@@ -30,11 +31,6 @@ class KanbanBox extends React.Component {
     const doneData = parsedMongoData.filter((el, index) => {
       return parsedMongoData[index].status === "done"
     });
-
-    const sendingData = [];
-    sendingData.push(toDoData);
-    sendingData.push(doingData);
-    sendingData.push(doneData);
 
     const sendingObj = {
       toDo: toDoData,
@@ -87,7 +83,9 @@ class KanbanBox extends React.Component {
         <ToDoBox data={this.props.toDo} edit={this.editHandler} handler={this.updateHandler}/>
         <DoingBox data={this.props.doing} edit={this.editHandler} handler={this.updateHandler}/>
         <DoneBox data={this.props.done} edit={this.editHandler} handler={this.updateHandler}/>
+        <NewTaskForm handler={this.props.handler}/>
       </div>
+
     );
   };
 };

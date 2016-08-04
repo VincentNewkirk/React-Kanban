@@ -33,8 +33,8 @@ class NewTaskForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <h3> New Task </h3>
+      <div className="taskDiv">
+        <h3> Add New Task </h3>
         <input type='text' id='authorInput'name='author' placeholder="Created By:"/>
         <input type='text' id='titleInput'name='title' placeholder="Title"/>
         <input type='text' id='assignedInput'name='assigned' placeholder="Assigned To" />

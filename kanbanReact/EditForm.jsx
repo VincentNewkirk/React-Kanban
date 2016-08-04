@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import Immutable from 'immutable';
 import style from ".././scss/styles.scss";
 
-
 class EditForm extends React.Component {
   constructor() {
     super();
