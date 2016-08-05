@@ -54,10 +54,6 @@ class NewTaskForm extends React.Component {
       {
         this.state.showNewTaskForm
           ? <div>
-              <input type='text' id='titleInput'name='title' placeholder="Task Title"/>
-              <input type='text' id='authorInput'name='author' placeholder="Author"/>
-              <input type='text' id='assignedInput'name='assigned' placeholder="Assign To" />
-              <input type='text' id='descriptionInput' name='description' placeholder='Task Description' />
               <select className="assignButton" id='priorityInput' name='priority'>
                 <option>Priority</option>
                 <option value="Low">Low</option>
@@ -65,6 +61,10 @@ class NewTaskForm extends React.Component {
                 <option value="High">High</option>
                 <option value="Blocker">Blocker</option>
               </select>
+              <input type='text' id='titleInput'name='title' placeholder="Task Title"/>
+              <input type='text' id='authorInput'name='author' placeholder="Author"/>
+              <input type='text' id='assignedInput'name='assigned' placeholder="Assign To" />
+              <input type='text' id='descriptionInput' name='description' placeholder='Task Description' />
 
               <div className="assignButton" id="newTaskButton" onClick={this.postTask}>SUBMIT</div>
             </div>

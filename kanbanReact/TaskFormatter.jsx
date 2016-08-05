@@ -86,8 +86,8 @@ class TaskFormatter extends React.Component {
       <div className='taskItem'>
         <div className="taskItemName">
           <div className="taskItemNameText">
-          {this.props.name}<br />
-          <span className="createdByLabel">Created By:</span> <span className="createdByName">{this.props.author}</span>
+            {this.props.name}<br />
+            <span className="createdByLabel">Created By:</span> <span className="createdByName">{this.props.author}</span>
           </div>
         </div>
         <button onClick={this.deleteTask} className="deleteButton"> X </button>
