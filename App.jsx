@@ -1,3 +1,4 @@
+'use strict';
 import React from 'react';
 import ToDoBox from './kanbanReact/ToDoBox.jsx';
 import DoingBox from './kanbanReact/DoingBox.jsx';

@@ -1,3 +1,4 @@
+'use strict';
 import React from 'react';
 import EditForm from './EditForm.jsx';
 import style from ".././scss/styles.scss";

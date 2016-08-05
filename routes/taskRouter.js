@@ -1,3 +1,4 @@
+'use strict';
 const Express = require('express');
 const Router = Express.Router();
 const db = require('../models/tasks');
