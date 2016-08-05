@@ -23,6 +23,7 @@ class EditForm extends React.Component {
       _id: this.props.uniqueID,
       index: this.props.index,
     }
+    this.inputValues = this.initialData;
   };
 
   handleInputUpdate(event) {
@@ -41,18 +42,29 @@ class EditForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>Created By: <input onChange={this.handleInputUpdate} type='text' id='author' value={this.initialData.author} /></p>
-        <p>Title: <input type='text' onChange={this.handleInputUpdate} id='name' value={this.initialData.name} /></p>
-        <p>Assigned To: <input onChange={this.handleInputUpdate} type='text' id='assigned' value={this.initialData.assigned} /></p>
-        <p>Description: <input onChange={this.handleInputUpdate} type='text' id='description' value={this.initialData.description} /></p>
-        <select id='priority' onChange={this.handleInputUpdate} name='priority'>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-          <option value="Blocker">Blocker</option>
-        </select>
-        <button type="submit" onClick={this.putRequest}>Edit</button>
+      <div className="editContainer">
+        <div className="editLabels">
+          <p>Created By: </p>
+          <p>Title: </p>
+          <p>Assigned To: </p>
+          <p>Description: </p>
+
+        </div>
+        <div className="editInputs">
+          <p><input onChange={this.handleInputUpdate} type='text' id='author' value={this.initialData.author} /></p>
+          <p><input type='text' onChange={this.handleInputUpdate} id='name' value={this.initialData.name} /></p>
+          <p><input onChange={this.handleInputUpdate} type='text' id='assigned' value={this.initialData.assigned} /></p>
+          <p><input onChange={this.handleInputUpdate} type='text' id='description' value={this.initialData.description} /></p>
+        </div>
+        <div className="editBottom">
+          Priority: <select className="assignButton" id='priority' onChange={this.handleInputUpdate} name='priority'>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+            <option value="Blocker">Blocker</option>
+          </select>
+        </div>
+      <div id="saveButton" onClick={this.putRequest}>SAVE</div>
       </div>
     )
   }

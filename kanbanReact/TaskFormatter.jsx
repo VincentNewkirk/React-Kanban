@@ -84,26 +84,31 @@ class TaskFormatter extends React.Component {
   render() {
     return (
       <div className='taskItem'>
-        <span className="taskItemName">
-        {this.props.name}</span>
+        <div className="taskItemName">
+        {this.props.name}<br />
+        <span className="createdByLabel">Created By:</span> <span className="createdByName">{this.props.author}</span>
+        </div>
         <button onClick={this.deleteTask} className="deleteButton"> X </button>
-        <p>Created By: {this.props.author}</p>
-        <p>Assigned To: {this.props.assigned}</p>
-        <p>Priority Level: {this.props.priority}</p>
-        <p>{this.props.description}</p>
-        <button onClick={this.toDoStatus}> To Do</button>
-        <button onClick={this.doingStatus}> Doing </button>
-        <button onClick={this.doneStatus}> Done </button>
-        <ShowHide author={this.props.author}
-        assigned={this.props.assigned}
-        uniqueID={this.props.uniqueID}
-        priority={this.props.priority}
-        name={this.props.name}
-        handler={this.props.handler}
-        status={this.props.status}
-        edit={this.props.edit}
-        description={this.props.description}
-        index={this.props.index}/>
+        <div className="taskItemBody">
+          <p><span className="fieldLabels">Assigned To:</span> {this.props.assigned}</p>
+          <p><span className="fieldLabels">Priority Level:</span> {this.props.priority}</p>
+          <p>{this.props.description}</p>
+          <div className="assignButtonContainer">
+            <div className="assignButton" onClick={this.toDoStatus}>TO DO</div>
+            <div className="assignButton" onClick={this.doingStatus}>DOING</div>
+            <div className="assignButton" onClick={this.doneStatus}>DONE</div>
+          </div>
+          <ShowHide author={this.props.author}
+          assigned={this.props.assigned}
+          uniqueID={this.props.uniqueID}
+          priority={this.props.priority}
+          name={this.props.name}
+          handler={this.props.handler}
+          status={this.props.status}
+          edit={this.props.edit}
+          description={this.props.description}
+          index={this.props.index}/>
+        </div>
       </div>
     );
   };
