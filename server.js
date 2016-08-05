@@ -83,7 +83,7 @@ const onStart = (err) => {
   );
 };
 
-app.listen(port, onStart);
+app.listen(port, 'localhost', onStart);
 
 module.exports = app;
 
