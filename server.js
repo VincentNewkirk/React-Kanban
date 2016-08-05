@@ -50,17 +50,18 @@ if (isDeveloping) {
     res.end();
   };
 
-  app.use(middleware);
-  app.use(webpackHotMiddleware(compiler));
-  app.get('*', response);
-} else {
-  app.use(express.static(`${__dirname}/dist`));
-  app.get('*', (req, res) => {
-    res.write(
-      fs.readFileSync(path.resolve(__dirname, 'dist/index.html'))
-    );
-  });
-}
+//   app.use(middleware);
+//   app.use(webpackHotMiddleware(compiler));
+//   app.get('*', response);
+// } else {
+//   app.use(express.static(`${__dirname}/dist`));
+//   app.get('*', (req, res) => {
+//     res.write(
+//       fs.readFileSync(path.resolve(__dirname, 'dist/index.html'))
+//     );
+
+//   });
+// }
 
 
 
