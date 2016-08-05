@@ -36,7 +36,7 @@ class EditForm extends React.Component {
   }
 
   putRequest() {
-    console.log(this.inputValues, 'PUT RQ');
+    this.props.hideDiv();
     this.props.edit(this.inputValues);
   }
 
@@ -57,7 +57,7 @@ class EditForm extends React.Component {
           <p><input onChange={this.handleInputUpdate} type='text' id='description' value={this.initialData.description} /></p>
         </div>
         <div className="editBottom">
-          Priority: <select className="assignButton" id='priority' onChange={this.handleInputUpdate} name='priority'>
+          Priority: <select className="assignButton" id='priority' onChange={this.handleInputUpdate} name='priority' value={this.initialData.priority}>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>

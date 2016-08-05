@@ -28,6 +28,7 @@ var ShowHide = React.createClass({
               handler={this.props.handler}
               status={this.props.status}
               edit={this.props.edit}
+              hideDiv={this.onClick}
               description={this.props.description}
               index={this.props.index}
               />

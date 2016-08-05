@@ -114,7 +114,7 @@ div#colThree {
 .colHeader {
   font-size: 2em;
   font-weight: 700;
-  color: $lightFontColor;
+  color: $taskCardColor;
 }
 
 .taskItem {
@@ -370,6 +370,6 @@ div#colThree {
 }
 
 #newTaskHeader {
-  color: $lightFontColor;
+  color: $taskCardColor;
   margin: 0px;
 }
