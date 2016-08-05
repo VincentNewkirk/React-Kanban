@@ -94,9 +94,9 @@ class TaskFormatter extends React.Component {
           <p><span className="fieldLabels">Priority Level:</span> {this.props.priority}</p>
           <p>{this.props.description}</p>
           <div className="assignButtonContainer">
-            <div className="assignButton" onClick={this.toDoStatus}>TO DO</div>
-            <div className="assignButton" onClick={this.doingStatus}>DOING</div>
-            <div className="assignButton" onClick={this.doneStatus}>DONE</div>
+            <div className="assignButton toDoButton" onClick={this.toDoStatus}>TO DO</div>
+            <div className="assignButton doingButton" onClick={this.doingStatus}>DOING</div>
+            <div className="assignButton doneButton" onClick={this.doneStatus}>DONE</div>
           </div>
           <ShowHide author={this.props.author}
           assigned={this.props.assigned}

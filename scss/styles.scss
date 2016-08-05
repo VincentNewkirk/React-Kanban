@@ -38,14 +38,23 @@ body {
 
     div#colOne {
       flex: 1 1 30%;
+      .toDoButton{
+        display: none;
+      }
     }
 
     div#colTwo {
       flex: 1 1 30%;
+      .doingButton{
+        display: none;
+      }
     }
 
     div#colThree {
       flex: 1 1 30%;
+      .doneButton{
+        display: none;
+      }
     }
   }
 }
@@ -98,16 +107,25 @@ div#titleDiv {
 
 div#colOne {
   background-color: $taskHolderColor;
+  .toDoButton {
+    display: none;
+  }
   flex: 1 1 90%;
 }
 
 div#colTwo {
   background-color: $taskHolderColor;
+  .doingButton {
+    display: none;
+  }
   flex: 1 1 90%;
 }
 
 div#colThree {
   background-color: $taskHolderColor;
+  .doneButton {
+    display: none;
+  }
   flex: 1 1 90%;
 }
 
@@ -370,6 +388,6 @@ div#colThree {
 }
 
 #newTaskHeader {
-  color: $taskCardColor;
+  color: $lightFontColor;
   margin: 0px;
 }
