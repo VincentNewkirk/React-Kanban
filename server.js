@@ -12,7 +12,7 @@ const config = require('./webpack.config.js');
 const compiler = webpack(config);
 
 const mongoose = require('mongoose');
-mongoose.connect('  mongodb://<dbuser>:<dbpassword>@ds145405.mlab.com:45405/heroku_bb2qg2bt');
+mongoose.connect('  mongodb://ds145405.mlab.com:45405/heroku_bb2qg2bt');
 const db = mongoose.connection;
 const taskRouter = require('./routes/taskRouter');
 const bodyParser = require('body-parser');
