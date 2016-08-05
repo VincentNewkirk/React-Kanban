@@ -22,6 +22,7 @@ module.exports = {
     extensions: ['', '.js'],
   },
   plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
     new HtmlWebpackPlugin({
       template: 'index.tpl.html',
       inject: 'body',
