@@ -52,8 +52,8 @@ class EditForm extends React.Component {
 
         </div>
         <div className="editInputs">
-          <p><input onChange={this.handleInputUpdate} type='text' id='author' value={this.initialData.author} /></p>
           <p><input type='text' onChange={this.handleInputUpdate} id='name' value={this.initialData.name} /></p>
+          <p><input onChange={this.handleInputUpdate} type='text' id='author' value={this.initialData.author} /></p>
           <p><input onChange={this.handleInputUpdate} type='text' id='assigned' value={this.initialData.assigned} /></p>
           <p><input onChange={this.handleInputUpdate} type='text' id='description' value={this.initialData.description} /></p>
         </div>
