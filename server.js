@@ -30,30 +30,30 @@ app.use(bodyParser.json());
 
 app.use('/tasks', taskRouter);
 
-if (isDeveloping) {
-  app.set('host', 'http://localhost');
-  const compiler = webpack(config);
-  const middleware = webpackMiddleware(compiler, {
-    publicPath: config.output.publicPath,
-    contentBase: 'src',
-    stats: {
-      colors: true,
-      hash: false,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false,
-    },
-  });
-  const response = (req, res) => {
-    res.write(middleware.fileSystem.readFileSync(path.resolve(__dirname, 'dist/index.html')));
-    res.end();
-  };
+// if (isDeveloping) {
+//   app.set('host', 'http://localhost');
+//   const compiler = webpack(config);
+//   const middleware = webpackMiddleware(compiler, {
+//     publicPath: config.output.publicPath,
+//     contentBase: 'src',
+//     stats: {
+//       colors: true,
+//       hash: false,
+//       timings: true,
+//       chunks: false,
+//       chunkModules: false,
+//       modules: false,
+//     },
+//   });
+//   const response = (req, res) => {
+//     res.write(middleware.fileSystem.readFileSync(path.resolve(__dirname, 'dist/index.html')));
+//     res.end();
+//   };
 
-  app.use(middleware);
-  app.use(webpackHotMiddleware(compiler));
-  app.get('*', response);
-} else {
+//   app.use(middleware);
+//   app.use(webpackHotMiddleware(compiler));
+//   app.get('*', response);
+// } else {
   app.use(express.static(`${__dirname}/dist`));
   console.log('IT WENT INTO THE ELSE');
   app.get('*', (req, res) => {
@@ -62,7 +62,7 @@ if (isDeveloping) {
     );
 
   });
-}
+//}
 
 
 
