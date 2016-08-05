@@ -5,6 +5,15 @@ class NewTaskForm extends React.Component {
   constructor() {
     super();
     this.postTask = this.postTask.bind(this);
+    this.onClick = this.onClick.bind(this)
+    this.state = {
+      showNewTaskForm: false,
+    }
+  }
+
+
+  onClick(){
+    this.setState({showNewTaskForm: !this.state.showNewTaskForm})
   }
 
   postTask() {
@@ -17,7 +26,7 @@ class NewTaskForm extends React.Component {
     const req = new XMLHttpRequest();
     req.addEventListener('load', function(){
       if(this.responseText){
-        that.props.handler();
+        that.props.handler()
       }
     });
     req.open('POST', `/tasks`);
@@ -29,23 +38,32 @@ class NewTaskForm extends React.Component {
       "assigned": `${assigned}`,
       "priority": `${priority}`,
     }));
+    this.setState({showNewTaskForm: !this.state.showNewTaskForm})
   }
 
   render() {
     return (
-      <div className="taskDiv">
-        <h3> Add New Task </h3>
-        <input type='text' id='authorInput'name='author' placeholder="Created By:"/>
-        <input type='text' id='titleInput'name='title' placeholder="Title"/>
-        <input type='text' id='assignedInput'name='assigned' placeholder="Assigned To" />
-        <input type='text' id='descriptionInput' name='description' placeholder='Task Description' />
-        <select id='priorityInput' name='priority'>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-          <option value="Blocked">Blocker</option>
-        </select>
-        <button onClick={this.postTask} type="Submit">Submit</button>
+      <div>
+        <div>
+          <h3 onClick={this.onClick}> New Task </h3>
+        </div>
+      {
+        this.state.showNewTaskForm
+          ? <div>
+              <input type='text' id='authorInput'name='author' placeholder="Created By:"/>
+              <input type='text' id='titleInput'name='title' placeholder="Title"/>
+              <input type='text' id='assignedInput'name='assigned' placeholder="Assigned To" />
+              <input type='text' id='descriptionInput' name='description' placeholder='Task Description' />
+              <select id='priorityInput' name='priority'>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Blocked">Blocker</option>
+              </select>
+              <button onClick={this.postTask} type="Submit">Submit</button>
+            </div>
+              : null
+      }
       </div>
     )
   };
