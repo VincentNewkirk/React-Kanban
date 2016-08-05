@@ -85,7 +85,6 @@ class KanbanBox extends React.Component {
         <DoneBox data={this.props.done} edit={this.editHandler} handler={this.updateHandler}/>
         <NewTaskForm handler={this.updateHandler}/>
       </div>
-
     );
   };
 };

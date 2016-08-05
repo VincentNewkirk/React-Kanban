@@ -3,30 +3,37 @@
 /* @import 'partials/reset'; */
 
 // Variables
-$bgColor: #b5b5b5;
+$headerColor: #605063;
+$mainDivColor: #248F8D;
+$taskHolderColor: #61ADA0;
+$taskHeaderColor: #B2D5BA;
+$taskCardColor: #EFF3CD;
+$lightFontColor: #B2D5BA;
+$darkFontColor: #605063;
 
 // Media Query Ranges
 $large: "only screen and (min-width: 900px)";
 
 *{
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Reem Kufi', sans-serif;
   text-align:center;
+  letter-spacing: 1px;
 }
 
 body {
-  background-color: #a0a0a0;
+  background-color: $headerColor;
   text-align: center;
   align-items: center;
   padding: 10px;
+  position:relative;
+  top:55px;
+  z-index:1;
 
   @media #{$large}{
     div#titleDiv {
-      background-color: #f1f1f1;
       display: block;
-      width: 100%;
+      width: 95%;
       font-size: 1.5em;
-      -webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 2s;
-      transition: width 2s, height 2s, background-color 2s, transform 2s;
     }
 
     div#colOne {
@@ -45,6 +52,10 @@ body {
 
 h1 {
   font-weight: 700;
+  position: absolute;
+  margin: auto;
+  left: 18px;
+  top: -60px;
 }
 
 div {
@@ -52,74 +63,106 @@ div {
 }
 
 div#mainDiv {
-  background-color: #000000;
+  background-color: $mainDivColor;
   display:flex;
   flex-flow: row wrap;
   text-align: center;
+  margin-bottom: 26px;
 }
 
 .taskDiv {
-  background-color:#ffffff;
+  background-color: $mainDivColor;
   width: 100%;
   margin: 0px;
 }
 
 input {
   text-align: left;
-  margin: 0px 5px 5px 5px;
+  margin: 0px 5px 0px 0px;
 }
 
 div#titleDiv {
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0000ff), to(#00008b));
-  background: -webkit-linear-gradient(top, #0000ff, #00008b);
-  background: -moz-linear-gradient(top, #0000ff, #00008b);
-  background: -ms-linear-gradient(top, #0000ff, #00008b);
-  background: -o-linear-gradient(top, #0000ff, #00008b);
-  border-bottom: 3px #ffffff solid;
+  background-color: $headerColor;
+  text-align: center;
   color: #ffffff;
   display: block;
-  width: 100%;
   font-size: 1em;
+  margin:0 0 0 0;
+  height: 0px;
+  width:100%;
+  position:absolute;
+  top:0px;
+  left:0px;
+  z-index:2;
 }
 
 div#colOne {
-  background-color: #f1f1f1;
+  background-color: $taskHolderColor;
   flex: 1 1 90%;
 }
 
 div#colTwo {
-  background-color: #dcdcdc;
+  background-color: $taskHolderColor;
   flex: 1 1 90%;
 }
 
 div#colThree {
-  background-color: #cdcdcd;
+  background-color: $taskHolderColor;
   flex: 1 1 90%;
 }
 
 .colHeader {
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: 700;
-  color: #000000;
+  color: $lightFontColor;
 }
 
 .taskItem {
-  background-color: #ffffff;
-  border: 1px black solid;
-  border-radius: 2%;
-  margin: 10px;
+  background-color: $taskCardColor;
+  padding: 0px;
+
+  margin-top: 20px;
+
   position: relative;
   overflow: hidden;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
-  //white-space: nowrap;
-  //width: 100%;
+  -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.75);
 }
 
+
+
 .taskItemName {
+  background-color: $taskHeaderColor;
+  color: $darkFontColor;
+  width: 100%;
   font-size: 1.5em;
-  line-height: 10%;
   font-weight: 700;
+  margin-right: 10px;;
+  padding: 0px 0px 0px 10px;
+  text-align: left;
+}
+
+
+.taskItemBody {
+  font-size: 18px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.fieldLabels {
+  margin: 0px;
+}
+
+.createdByLabel {
+  font-size:15px;
+  margin: 0px;
+}
+
+.createdByName {
+  font-size: 20px;
   margin: 0px;
 }
 
@@ -139,8 +182,9 @@ div#colThree {
   border-radius: 15%;
   margin: 3px;
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 15px;
+  right: 15px;
+  width: 25px;
 }
 
 .deleteButton:hover {
@@ -156,18 +200,17 @@ div#colThree {
   border-radius: 15%;
   margin: 3px;
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 15px;
+  right: 15px;
 }
 
-
 #editButton {
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #003399);
-  background-image: -moz-linear-gradient(top, #3498db, #003399);
-  background-image: -ms-linear-gradient(top, #3498db, #003399);
-  background-image: -o-linear-gradient(top, #3498db, #003399);
-  background-image: linear-gradient(to bottom, #3498db, #003399);
+  background: #036564;
+  background-image: -webkit-linear-gradient(top, #036564, #033649);
+  background-image: -moz-linear-gradient(top, #036564, #033649);
+  background-image: -ms-linear-gradient(top, #036564, #033649);
+  background-image: -o-linear-gradient(top, #036564, #033649);
+  background-image: linear-gradient(to bottom, #036564, #033649);
   font-size: 0.75em;
   color: #ffffff;
   text-align: center;
@@ -177,46 +220,156 @@ div#colThree {
   border-radius: 15%;
   margin: 3px;
   position: absolute;
-  top: 0px;
-  right: 20px;
+  top: 15px;
+  right: 45px;
 }
 
 #editButton:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #0033cc);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #0033cc);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #0033cc);
-  background-image: -o-linear-gradient(top, #3cb0fd, #0033cc);
-  background-image: linear-gradient(to bottom, #3cb0fd, #0033cc);
+  background: lighten(#036564, 10%);
+  background-image: -webkit-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: -moz-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: -ms-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: -o-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
   padding: 5px;
   font-weight: 700;
   border: 0px;
   border-radius: 15%;
   margin: 3px;
   position: absolute;
+  top: 15px;
+  right: 45px;
+}
+
+#saveButton {
+  background: #036564;
+  background-image: -webkit-linear-gradient(top, #036564, #033649);
+  background-image: -moz-linear-gradient(top, #036564, #033649);
+  background-image: -ms-linear-gradient(top, #036564, #033649);
+  background-image: -o-linear-gradient(top, #036564, #033649);
+  background-image: linear-gradient(to bottom, #036564, #033649);
+  font-size: 0.75em;
+  color: #ffffff;
+  text-align: center;
+  padding: 5px;
+  font-weight: 700;
+  border: 0px;
+  border-radius: 5%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+
+  top: 0px;
+  right: 20px;
+  width: 90%;
+}
+
+#saveButton:hover {
+  background: lighten(#036564, 10%);
+  background-image: -webkit-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: -moz-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: -ms-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: -o-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
   top: 0px;
   right: 20px;
 }
 
-
-/* .hideOrShow:hover> div {
-  display: block;
-  background-color: #ff0000;
+.assignButtonContainer {
+  display:flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 0px;
 }
 
-.hideOrShow> span {
-  display: none;
-  background-color: #000000;
-} */
-
-/* a .hidden { visibility: hidden; }
-a:visited .hidden { visibility: visible; } */
-
-/* .tryThis:hover>div {
-    display: none;
+.assignButton {
+  background: #036564;
+  background-image: -webkit-linear-gradient(top, #036564, #033649);
+  background-image: -moz-linear-gradient(top, #036564, #033649);
+  background-image: -ms-linear-gradient(top, #036564, #033649);
+  background-image: -o-linear-gradient(top, #036564, #033649);
+  background-image: linear-gradient(to bottom, #036564, #033649);
+  font-size: 0.75em;
+  color: #ffffff;
+  text-align: center;
+  padding: 5px;
+  font-weight: 700;
+  border: 0px;
+  border-radius: 5%;
+  margin: 5px;
 }
 
-.tryThis:hover>div {
-    display: block;
-} */
+.assignButton:hover {
+  background: lighten(#036564, 10%);
+  background-image: -webkit-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: -moz-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: -ms-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: -o-linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  background-image: linear-gradient(top, lighten(#036564, 10%), lighten(#033649, 10%));
+  padding: 5px;
+  font-weight: 700;
+  border: 0px;
+  border-radius: 5%;
+}
 
+.editContainer {
+  display:flex;
+  flex-flow: row wrap;
+}
+
+.editLabels {
+  flex: 1 1 15%;
+  p {
+    text-align: left;
+  }
+}
+
+.editInputs {
+  flex: 1 1 55%;
+  input {
+  width: 99%;
+  }
+}
+
+.editBottom {
+  flex: 1 1 90%;
+}
+
+.fieldLabels {
+  font-weight: 700;
+}
+
+#newTaskFooter {
+  display: flex;
+  justify-content: center;
+  //width: 96.33%;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  left: 26px;
+  right: 26px;
+  bottom: -8px;
+  div {
+    display: flex;
+    justify-content: center;
+    background-color: $mainDivColor;
+    width: 100%;
+    #newTaskButton{
+      width:4%;
+      margin-left: 25px;
+    }
+    input {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    select {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+  }
+}
+
+#newTaskHeader {
+  color: $lightFontColor;
+  margin: 0px;
+}
