@@ -73,8 +73,8 @@ module.exports = {
         'sass',
       ],
     }],
-    // postcss: [
-    // require('autoprefixer')
-    // ]
+    postcss: [
+    require('autoprefixer')
+    ]
   }
 };
